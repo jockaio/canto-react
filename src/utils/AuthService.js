@@ -4,15 +4,15 @@ import auth0 from 'auth0-js';
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 
-const CLIENT_ID = '{AUTH0_CLIENT_ID}';
-const CLIENT_DOMAIN = '{AUTH0_DOMAIN}';
-const REDIRECT = 'YOUR_CALLBACK_URL';
-const SCOPE = '{SCOPE}';
-const AUDIENCE = 'AUDIENCE_ATTRIBUTE';
+const CLIENT_ID = 'YtTJ9atZjsbwW9Q30NQXrEyoU14lBmhd';
+const CLIENT_DOMAIN = 'jhellerstrom.auth0.com';
+const REDIRECT = 'http://localhost:3000/callback';
+const SCOPE = 'openid profile';
+const AUDIENCE = 'http://cantofy.com';
 
 var auth = new auth0.WebAuth({
   clientID: CLIENT_ID,
-  domain: CLIENT_DOMAIN
+  domain: CLIENT_DOMAIN,
 });
 
 export function login() {
@@ -88,4 +88,11 @@ function getTokenExpirationDate(encodedToken) {
 function isTokenExpired(token) {
   const expirationDate = getTokenExpirationDate(token);
   return expirationDate < new Date();
+}
+
+export function getProfile(cb) {
+  let accessToken = getAccessToken();
+  auth.client.userInfo(accessToken, (err, profile) => {
+    return cb(err, profile);
+  });
 }

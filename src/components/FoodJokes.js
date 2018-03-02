@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Nav from './Nav';
-import { isLoggedIn } from '../utils/AuthService';
-import { getFoodData } from '../utils/chucknorris-api';
+import { isLoggedIn} from '../utils/AuthService';
+import { getFoodData} from '../utils/chucknorris-api';
 
 
 class FoodJokes extends Component {

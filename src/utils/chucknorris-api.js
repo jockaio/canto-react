@@ -3,7 +3,7 @@ import { getAccessToken } from './AuthService';
 
 const BASE_URL = 'http://localhost:3333';
 
-export {getFoodData, getCelebrityData};
+export {getFoodData, getCelebrityData, getUserData};
 
 function getFoodData() {
   const url = `${BASE_URL}/api/jokes/food`;
@@ -13,4 +13,9 @@ function getFoodData() {
 function getCelebrityData() {
   const url = `${BASE_URL}/api/jokes/celebrity`;
   return axios.get(url, { headers: { Authorization: `Bearer ${getAccessToken()}` }}).then(response => response.data);
+}
+
+function getUserData() {
+  const url = `${BASE_URL}/api/userprofile`;
+  return axios.get(url, { headers: { Authorization: `Bearer ${getAccessToken()}` }}).then(response => console.log(response.data));
 }
