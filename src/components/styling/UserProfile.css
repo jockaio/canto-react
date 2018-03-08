@@ -1,8 +1,15 @@
 .profile-area img {
     max-width: 150px;
     margin-bottom: 20px;
+    margin-right: 10px;
+    float: left;
   }
-  
+
+  .profile-body{
+    overflow: hidden;
+    padding: 10px;
+  }
+
   .panel-body h3 {
     margin-top: 0;
   }

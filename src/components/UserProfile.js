@@ -19,13 +19,20 @@ class Profile extends Component {
         <Nav />
         <div className="profile-area">
           <h1>{profile.name}</h1>
-          <Panel header="Profile">
+          <Panel header="Profile" className="profile-body">
             <img src={profile.picture} alt="profile" />
             <div>
               <ControlLabel><Glyphicon glyph="user" /> Nickname</ControlLabel>
-              <h3>{profile.nickname}</h3>
+              <p>{profile.nickname}</p>
             </div>
-            <pre>{JSON.stringify(profile, null, 2)}</pre>
+            <div>
+              <ControlLabel> Gender</ControlLabel>
+              <p>{profile.gender}</p>
+            </div>
+            <div>
+              <h3>Dev info</h3>
+              <pre>{JSON.stringify(profile, null, 2)}</pre>
+            </div>
           </Panel>
         </div>
       </div>

@@ -17,11 +17,11 @@ class Nav extends Component {
              ( isLoggedIn() ) ? <Link to="/myprofile">My profile</Link> :  ''
             }
           </li>
-          <li>
+          {/* <li>
             { 
              ( isLoggedIn() ) ? <Link to="/special">Celebrity Jokes</Link> :  ''
             }
-          </li>
+          </li> */}
         </ul>
         <ul className="nav navbar-nav navbar-right">
           <li>
