@@ -6,6 +6,8 @@ const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const TranslationHandler = require('./translationHandler');
+const translationHandler = new TranslationHandler();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -49,7 +51,10 @@ app.get('/api/userprofile', authCheck, (req,res) => {
     console.log(JSON.stringify(req.user, null, '  '));
 });
 
-//app.patch('/api/updateuser', )
-
+app.get('/api/translation', (req, res) => {
+    console.log(req.query.queryString);
+    let result = translationHandler.translate(req.query.queryString);
+    res.json(result);
+});
 app.listen(3333);
 console.log('Listening on localhost:3333');
