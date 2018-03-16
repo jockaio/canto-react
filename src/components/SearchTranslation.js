@@ -1,37 +1,47 @@
 import React, {Component} from 'react';
-import Search from 'react-search-box';
+import {getTranslation} from '../utils/translation-api'
+import SearchInput, {createFilter} from 'react-search-input'
+import './styling/SearchTranslation.css';
 
 class SearchTranslation extends Component{
     constructor() {
         super();
-
         this.state = {
-            data: []
+            searchTerm: '',
+            searchResult: []
         };
+        this.searchUpdated = this.searchUpdated.bind(this)
     }
     
-    componentDidMount() {
-        this.setState({
-            data: [{name: 'hello'}, {name:'world'}]
-        });
-    }
-
-    handleChange(value) {
-        console.log(value);
-    }
-
+    
     render (){
+        const filteredSearchResult = this.state.searchResult;
         return (
             <div>
-                <Search
-                data={ this.state.data }
-                onChange={ this.handleChange.bind(this) }
-                placeholder="Search for a string..."
-                class="search-class"
-                searchKey="name"
-              /> 
+                <SearchInput className="search-input" onChange={this.searchUpdated} />
+                {filteredSearchResult.map(word => {
+                    return (
+                        <div className="word-container" key={word.id}>
+                            <div className="word-item">{word.item}</div>
+                            <div className="word-romanization">{word.romanization}</div>
+                            <div className="word-translation">{word.translation}</div>
+                        </div>
+                    )
+                })}
             </div>
         );
+    }
+
+    searchUpdated (term) {
+        if(term.length > 0){
+            getTranslation(term).then((response) => {
+                this.setState({searchResult: response});
+                console.log(this.searchResult);
+            });
+        }else{
+            this.setState({searchResult: []});            
+        }
+        this.setState({searchTerm: term})
     }
 }
 
