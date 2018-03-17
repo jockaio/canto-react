@@ -50,18 +50,26 @@ app.get('/api/dbConnection', authCheck, (req, res) => {
 
 app.get('/api/word', authCheck, (req, res) => {
   console.log(req.query.queryString);
-  db.Word.findAll({
-    where: {
-      item: {
-        [Op.like] : '%'+req.query.queryString+'%'
+  if(req.query.queryString !== 'undefined'){
+    db.Word.findAll({
+      where: {
+        item: {
+          [Op.like] : '%'+req.query.queryString+'%'
+        }
       }
-    }
-  }).then((word) => {
-    res.json(word);
-  }).catch((e) => {
-    console.log(e);
-    res.send();
-  });
+    }).then((word) => {
+      res.json(word);
+    }).catch((e) => {
+      console.log(e);
+      res.send();
+    });
+  }else{
+    db.Word.findAll().then((word) => { res.json(word)})
+    .catch((e) => {
+      console.log(e);
+      req.send();
+    });
+  }
 });
 
 
