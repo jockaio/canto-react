@@ -10,6 +10,8 @@ const REDIRECT = process.env.REDIRECT;
 const SCOPE = process.env.SCOPE;
 const AUDIENCE = process.env.AUDIENCE;
 
+console.log(process.env.CLIENT_DOMAIN);
+
 var auth = new auth0.WebAuth({
   clientID: CLIENT_ID,
   domain: CLIENT_DOMAIN,
