@@ -10,6 +10,7 @@ const TranslationHandler = require('./translationHandler');
 const translationHandler = new TranslationHandler();
 const db = require('./storage');
 const Op = db.Sequelize.Op;
+const port = process.env.PORT || 3333;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -73,5 +74,4 @@ app.get('/api/word', authCheck, (req, res) => {
 });
 
 
-app.listen(3333);
-console.log('Listening on localhost:3333');
+app.listen(port);
