@@ -4,11 +4,11 @@ import auth0 from 'auth0-js';
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 
-const CLIENT_ID = 'YtTJ9atZjsbwW9Q30NQXrEyoU14lBmhd';
-const CLIENT_DOMAIN = 'jhellerstrom.auth0.com';
-const REDIRECT = 'http://localhost:3000/callback';
-const SCOPE = 'openid profile';
-const AUDIENCE = 'http://cantofy.com';
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_DOMAIN = process.env.CLIENT_DOMAIN;
+const REDIRECT = process.env.REDIRECT;
+const SCOPE = process.env.SCOPE;
+const AUDIENCE = process.env.AUDIENCE;
 
 var auth = new auth0.WebAuth({
   clientID: CLIENT_ID,
