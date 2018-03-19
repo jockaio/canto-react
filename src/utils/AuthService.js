@@ -1,16 +1,18 @@
 import decode from 'jwt-decode';
 import { browserHistory } from 'react-router';
 import auth0 from 'auth0-js';
+import runtimeEnv from '@mars/heroku-js-runtime-env';
+const env = runtimeEnv();
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_DOMAIN = process.env.CLIENT_DOMAIN;
-const REDIRECT = process.env.REDIRECT;
-const SCOPE = process.env.SCOPE;
-const AUDIENCE = process.env.AUDIENCE;
+const CLIENT_ID = env.CLIENT_ID;
+const CLIENT_DOMAIN = env.CLIENT_DOMAIN;
+const REDIRECT = env.REDIRECT;
+const SCOPE = env.SCOPE;
+const AUDIENCE = env.AUDIENCE;
 
-console.log(process.env.CLIENT_DOMAIN);
+console.log(env.CLIENT_DOMAIN);
 
 var auth = new auth0.WebAuth({
   clientID: CLIENT_ID,
