@@ -6,13 +6,11 @@ const env = runtimeEnv();
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 
-const CLIENT_ID = env.CLIENT_ID;
-const CLIENT_DOMAIN = env.CLIENT_DOMAIN;
-const REDIRECT = env.REDIRECT;
-const SCOPE = env.SCOPE;
-const AUDIENCE = env.AUDIENCE;
-
-console.log(env.CLIENT_DOMAIN);
+const CLIENT_ID = env.REACT_APP_CLIENT_ID;
+const CLIENT_DOMAIN = env.REACT_APP_CLIENT_DOMAIN;
+const REDIRECT = env.REACT_APP_REDIRECT;
+const SCOPE = env.REACT_APP_SCOPE;
+const AUDIENCE = env.REACT_APP_AUDIENCE;
 
 var auth = new auth0.WebAuth({
   clientID: CLIENT_ID,

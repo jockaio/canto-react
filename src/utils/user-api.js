@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { getAccessToken } from './AuthService';
+import runtimeEnv from '@mars/heroku-js-runtime-env';
+const env = runtimeEnv();
 
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = env.REACT_APP_BASE_URL;
 
 export {getFoodData, getCelebrityData, getUserData};
 
