@@ -28,7 +28,7 @@ class SearchTranslation extends Component{
             <div>
                 <SearchInput className="search-input" onChange={this.searchUpdated} />
                 {filteredSearchResult.map(word => {
-                    if(this.state.searchTerm != ''){
+                    if(this.state.searchTerm !== ''){
                         return (
                             <div className="word-container" key={word.id}>
                                 <div className="word-item">{word.item}</div>
