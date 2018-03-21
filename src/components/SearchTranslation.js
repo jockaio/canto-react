@@ -30,7 +30,7 @@ class SearchTranslation extends Component{
                 {filteredSearchResult.map(word => {
                     if(this.state.searchTerm !== ''){
                         return (
-                            <div className="word-container" key={word.id}>
+                            <div className="word-container col-sm-1" key={word.id}>
                                 <div className="word-item">{word.item}</div>
                                 <div className="word-romanization">{word.romanization}</div>
                                 <div className="word-translation">{word.translation}</div>
