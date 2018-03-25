@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import {getTranslation} from '../utils/translation-api'
-import SearchInput, {createFilter} from 'react-search-input'
+import {getFilteredSearchResult} from '../utils/translation-api'
+import SearchInput from 'react-search-input'
 import {isLoggedIn} from '../utils/AuthService';
 import './styling/SearchTranslation.css';
-
-const KEYS_TO_FILTERS = ['item', 'romanization', 'translation']
 
 class SearchTranslation extends Component{
     constructor() {
@@ -18,14 +16,7 @@ class SearchTranslation extends Component{
     }
     
     renderLoggedInView(){
-        if(this.state.searchResult.length === 0){
-            getTranslation().then((response) => {
-                this.setState({
-                    searchResult: response
-                });
-            })
-        }
-        const filteredSearchResult = this.state.searchResult.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+        const filteredSearchResult = getFilteredSearchResult(this.state.searchTerm);
         return (
             <div>
                 <SearchInput className="search-input" onChange={this.searchUpdated} />
@@ -45,14 +36,6 @@ class SearchTranslation extends Component{
     }
 
     searchUpdated (term) {
-        // if(term.length > 0){
-        //     getTranslation(term).then((response) => {
-        //         this.setState({searchResult: response});
-        //         console.log(this.searchResult);
-        //     });
-        // }else{
-        //     this.setState({searchResult: []});            
-        // }
         this.setState({searchTerm: term})
     }
 
@@ -71,8 +54,6 @@ class SearchTranslation extends Component{
             return this.renderAnonymousView()
         }
     }
-
-    
 }
 
 export default SearchTranslation;
