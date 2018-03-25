@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {getTranslation} from '../utils/translation-api'
 import SearchInput, {createFilter} from 'react-search-input'
+import {isLoggedIn} from '../utils/AuthService';
 import './styling/SearchTranslation.css';
 
 const KEYS_TO_FILTERS = ['item', 'romanization', 'translation']
@@ -12,17 +13,18 @@ class SearchTranslation extends Component{
             searchTerm: '',
             searchResult: []
         };
-        getTranslation().then((response) => {
-            this.setState({
-                searchResult: response
-            });
-        })
         
         this.searchUpdated = this.searchUpdated.bind(this)
     }
     
-    
-    render (){
+    renderLoggedInView(){
+        if(this.state.searchResult.length === 0){
+            getTranslation().then((response) => {
+                this.setState({
+                    searchResult: response
+                });
+            })
+        }
         const filteredSearchResult = this.state.searchResult.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
         return (
             <div>
@@ -53,6 +55,24 @@ class SearchTranslation extends Component{
         // }
         this.setState({searchTerm: term})
     }
+
+    renderAnonymousView(){
+       return (
+            <div>
+                <p>Log in/Sign up to be able to search translations.</p>
+            </div>
+       );
+    }
+    
+    render (){
+        if(isLoggedIn()){ 
+            return this.renderLoggedInView() 
+        }else{
+            return this.renderAnonymousView()
+        }
+    }
+
+    
 }
 
 export default SearchTranslation;
